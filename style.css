@@ -1,0 +1,44 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--pink: #ff74a4;
+	--violet: #9f6ea3;
+	--lightBlack: #515c6f;
+	--white: #ffffff;
+	--darkWhite: #cecaca;
+	--pinkShadow: #ffcbdd;
+	--lightBlackShadow: rgba(0, 0, 0, 0.15);
+}
+
+body {
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
+}
+
+.wrapper {
+	width: 400px;
+	background: var(--white);
+	padding: 25px 25px;
+	border-radius: 15px;
+	box-shadow: 0 6px 15px var(--lightBlackShadow);
+}
+
+.wrapper i {
+	cursor: pointer;
+}
+
+.top-bar {
+	display: flex;
+	justify-content: space-between;
+}
+
+.controls {
+	display: flex;
+	justify-content: space-between;
+}
