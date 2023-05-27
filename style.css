@@ -1,3 +1,5 @@
+/* global setting start */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
@@ -21,6 +23,9 @@
 	font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
 }
 
+/* global setting end */
+
+/* music player body style start */
 body {
 	display: flex;
 	height: 100vh;
@@ -170,6 +175,8 @@ body {
 	-webkit-text-fill-color: transparent;
 	position: relative;
 }
+
+/* music player body style end */
 
 /* music list */
 .music-list {
