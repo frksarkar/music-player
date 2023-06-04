@@ -7,15 +7,15 @@ const musicData = [
 		src: './audio/Herman - Sick Of (Official Lyrics) (128 kbps).mp3',
 	},
 	{
-		name: 'Song Name 2',
-		artist: 'Artist 2',
-		image: 'path/to/image2.jpg',
-		src: 'path/to/audio2.mp3',
+		name: 'Hum Tumko Nigahon Mein',
+		artist: 'Udit Narayan',
+		image: './audio/Hum Tumko Nigahon Mein.jpg',
+		src: './audio/Hum Tumko Nigahon Mein.mp3',
 	},
 	{
-		name: 'Song Name 3',
-		artist: 'Artist 3',
-		image: 'path/to/image3.jpg',
-		src: 'path/to/audio3.mp3',
+		name: 'Dil Ne Ye Kaha Hai Dil Se',
+		artist: 'Sonu Nigam',
+		image: './audio/Dil Ne Ye Kaha Hai Dil Se.jpg',
+		src: './audio/Dil Ne Ye Kaha Hai Dil Se.mp3',
 	},
 ];
