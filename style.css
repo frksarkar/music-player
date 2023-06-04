@@ -92,10 +92,15 @@ body {
 	margin: 25px 0;
 	color: var(--lightBlack);
 }
+
 .song-details .name {
+	white-space: nowrap;
 	font-size: 1.5rem;
 	font-weight: 500;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
+
 .song-details .artist {
 	font-size: 15px;
 	opacity: 0.9;
@@ -112,7 +117,43 @@ body {
 	width: 50%;
 	height: inherit;
 	border-radius: inherit;
+	position: relative;
 	background: linear-gradient(90deg, var(--pink) 0%, var(--violet) 100%);
+	transition: all 0.3s ease ease-in-out;
+	-webkit-transition: all 0.3s ease ease-in-out;
+	-moz-transition: all 0.3s ease ease-in-out;
+	-ms-transition: all 0.3s ease ease-in-out;
+	-o-transition: all 0.3s ease ease-in-out;
+}
+
+.progress-bar::before {
+	content: '';
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	top: 50%;
+	right: -5px;
+	background: inherit;
+	transform: translateY(-50%);
+	opacity: 0;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transition: opacity 0.3s ease;
+	-webkit-transition: opacity 0.3s ease;
+	-moz-transition: opacity 0.3s ease;
+	-ms-transition: opacity 0.3s ease;
+	-o-transition: opacity 0.3s ease;
+}
+
+.progress-area:hover .progress-bar::before {
+	opacity: 1;
 }
 
 .controls {
@@ -184,7 +225,7 @@ body {
 	width: 100%;
 	max-height: inherit;
 	left: 0;
-	opacity: 0;
+	bottom: 0;
 	pointer-events: none;
 	background: var(--white);
 	padding: 15px 30px;
@@ -199,11 +240,19 @@ body {
 	-moz-transition: all 0.3s ease;
 	-ms-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
+	transform: translateY(100%);
+	-webkit-transform: translateY(100%);
+	-moz-transform: translateY(100%);
+	-ms-transform: translateY(100%);
+	-o-transform: translateY(100%);
 }
 .music-list.active {
-	bottom: 0;
-	opacity: 1;
+	transform: translateY(0%);
 	pointer-events: auto;
+	-webkit-transform: translateY(0%);
+	-moz-transform: translateY(0%);
+	-ms-transform: translateY(0%);
+	-o-transform: translateY(0%);
 }
 
 .music-list .header .row {
