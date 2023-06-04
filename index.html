@@ -29,10 +29,11 @@
 				<div class="progress-bar">
 					<span></span>
 				</div>
-			</div>
-			<div class="timer">
-				<span class="current">0:20</span>
-				<span class="current">3:20</span>
+				<div class="timer">
+					<span class="current-time">0:00</span>
+					<span class="total-time"></span>
+				</div>
+				<audio id="main-audio" src=""></audio>
 			</div>
 			<div class="controls">
 				<i id="repeat-plist" class="material-symbols-outlined"
@@ -40,7 +41,7 @@
 				>
 				<i id="prev" class="material-symbols-outlined">skip_previous</i>
 				<div class="play-pause">
-					<i class="material-symbols-outlined">play_arrow</i>
+					<i class="material-symbols-outlined">pause</i>
 				</div>
 				<i id="next" class="material-symbols-outlined">skip_next</i>
 				<i id="more-music" class="material-symbols-outlined"
@@ -130,6 +131,7 @@
 				</ul>
 			</div>
 		</div>
+		<script src="./music-list.js"></script>
 		<script src="./script.js"></script>
 	</body>
 </html>
