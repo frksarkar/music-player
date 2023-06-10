@@ -114,7 +114,6 @@ body {
 	cursor: pointer;
 }
 .progress-area .progress-bar {
-	width: 50%;
 	height: inherit;
 	border-radius: inherit;
 	position: relative;
