@@ -105,6 +105,7 @@ function musicPlayer() {
 		let totalSec = Math.floor(audioDuration % 60);
 		totalTime.innerText = `${totalMin}:${totalSec}`;
 	});
+
 	// myAudio.addEventListener('timeupdate', (even) => {
 	// 	const currTime = even.target.currentTime;
 	// 	const duration = even.target.duration;
@@ -134,6 +135,14 @@ function musicPlayer() {
 		myAudio.currentTime =
 			(clickedOffSetX / progressWidthVal) * songDuration;
 	});
+
+	switch (key) {
+		case value:
+			break;
+
+		default:
+			break;
+	}
 }
 
 musicPlayer();
