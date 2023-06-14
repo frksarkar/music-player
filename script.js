@@ -10,7 +10,7 @@ function musicPlayer() {
 		musicListBtn = wrapper.querySelector('#more-music'),
 		musicListBox = wrapper.querySelector('.music-list'),
 		musicBoxClose = wrapper.querySelector('#close'),
-		musicDirection = wrapper.querySelector('#repeat-plist'),
+		musicDirectionBtn = wrapper.querySelector('#repeat-plist'),
 		startTime = wrapper.querySelector('.current-time'),
 		totalTime = wrapper.querySelector('.total-time'),
 		progressArea = wrapper.querySelector('.progress-area'),
@@ -136,13 +136,43 @@ function musicPlayer() {
 			(clickedOffSetX / progressWidthVal) * songDuration;
 	});
 
-	switch (key) {
-		case value:
-			break;
+	musicDirectionBtn.addEventListener('click', () => {
+		let getText = musicDirectionBtn.innerText;
 
-		default:
-			break;
-	}
+		switch (getText) {
+			case 'repeat':
+				musicDirectionBtn.innerText = 'repeat_one';
+				musicDirectionBtn.setAttribute('title', 'song looped');
+				break;
+			case 'repeat_one':
+				musicDirectionBtn.innerText = 'shuffle';
+				musicDirectionBtn.setAttribute('title', 'playback shuffle');
+				break;
+			case 'shuffle':
+				musicDirectionBtn.innerText = 'repeat';
+				musicDirectionBtn.setAttribute('title', 'playlist looped');
+				break;
+		}
+	});
+
+	myAudio.addEventListener('ended', () => {
+		let getText = musicDirectionBtn.innerText;
+
+		switch (getText) {
+			case 'repeat':
+				nextAndPrevSong('next');
+				break;
+			case 'repeat_one':
+				myAudio.currentTime = 0;
+				loadMusic(musicIndex);
+				playMusic();
+				break;
+			case 'shuffle':
+				const randomIndex =
+					Math.floor(Math.random() * musicData.length) + 1;
+				break;
+		}
+	});
 }
 
 musicPlayer();
