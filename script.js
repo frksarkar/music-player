@@ -15,7 +15,7 @@ function musicPlayer() {
 		totalTime = wrapper.querySelector('.total-time'),
 		progressArea = wrapper.querySelector('.progress-area'),
 		progressLine = wrapper.querySelector('.progress-bar');
-	let musicIndex = 1;
+	let musicIndex = 0;
 
 	window.addEventListener('load', () => {
 		loadMusic(musicIndex);
@@ -168,8 +168,14 @@ function musicPlayer() {
 				playMusic();
 				break;
 			case 'shuffle':
-				const randomIndex =
-					Math.floor(Math.random() * musicData.length) + 1;
+				let randomIndex = Math.floor(Math.random() * musicData.length);
+				do {
+					randomIndex = Math.floor(Math.random() * musicData.length);
+				} while (musicIndex === randomIndex);
+				musicIndex = randomIndex;
+				console.log(musicIndex);
+				loadMusic(musicIndex);
+				playMusic();
 				break;
 		}
 	});
