@@ -302,3 +302,8 @@ body {
 .music-list ul li .audio-duration {
 	font-size: 15px;
 }
+
+ul li.playing {
+	color: #ff74a4;
+	pointer-events: none;
+}
