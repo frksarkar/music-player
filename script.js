@@ -17,171 +17,154 @@ const progressLine = wrapper.querySelector('.progress-bar');
 let musicIndex = 0;
 
 window.addEventListener('load', () => {
-    loadMusic(musicIndex);
+	loadMusic(musicIndex);
 });
 
 // load music function
 
 function loadMusic(index) {
-    musicName.innerText = musicData[index].name;
-    musicArtist.innerText = musicData[index].artist;
-    musicImg.src = musicData[index].image;
-    myAudio.src = musicData[index].src;
+	musicName.innerText = musicData[index].name;
+	musicArtist.innerText = musicData[index].artist;
+	musicImg.src = musicData[index].image;
+	myAudio.src = musicData[index].src;
 }
 
 // play pause button
 
 function pauseMusic() {
-    playPauseBtn.querySelector('i').innerText = 'pause';
-    wrapper.classList.remove('paused');
-    myAudio.pause();
+	playPauseBtn.querySelector('i').innerText = 'pause';
+	wrapper.classList.remove('paused');
+	myAudio.pause();
 }
 
 function playMusic() {
-    playPauseBtn.querySelector('i').innerText = 'play_arrow';
-    wrapper.classList.add('paused');
-    myAudio.play();
+	playPauseBtn.querySelector('i').innerText = 'play_arrow';
+	wrapper.classList.add('paused');
+	myAudio.play();
+	playingNow();
 }
 
 playPauseBtn.addEventListener('click', () => {
-    const isMusicPaused = wrapper.classList.contains('paused');
-    isMusicPaused ? pauseMusic() : playMusic();
+	const isMusicPaused = wrapper.classList.contains('paused');
+	isMusicPaused ? pauseMusic() : playMusic();
 });
 
 function nextAndPrevSong(value) {
-    if (value == 'next') {
-        musicIndex++;
-        musicIndex = musicIndex < musicData.length ? musicIndex : 0;
-        loadMusic(musicIndex);
-        playMusic();
-    } else {
-        musicIndex--;
-        musicIndex = musicIndex == -1 ? musicData.length - 1 : musicIndex;
-        loadMusic(musicIndex);
-        playMusic();
-    }
+	if (value == 'next') {
+		musicIndex++;
+		musicIndex = musicIndex < musicData.length ? musicIndex : 0;
+		loadMusic(musicIndex);
+		playMusic();
+		playingNow();
+	} else {
+		musicIndex--;
+		musicIndex = musicIndex == -1 ? musicData.length - 1 : musicIndex;
+		loadMusic(musicIndex);
+		playMusic();
+		playingNow();
+	}
 }
 
 nextBtn.addEventListener('click', () => {
-    nextAndPrevSong('next');
+	nextAndPrevSong('next');
 });
 
 prevBtn.addEventListener('click', () => {
-    nextAndPrevSong();
+	nextAndPrevSong();
 });
 
 musicListBtn.addEventListener('click', () => {
-    musicListBox.classList.add('active');
+	musicListBox.classList.add('active');
 });
 
 musicBoxClose.addEventListener('click', () => {
-    musicListBox.classList.remove('active');
+	musicListBox.classList.remove('active');
 });
 
 myAudio.addEventListener('timeupdate', (event) => {
-    const currTime = event.target.currentTime;
-    const { duration } = event.target;
-    const percentage = (currTime / duration) * 100;
+	const currTime = event.target.currentTime;
+	const { duration } = event.target;
+	const percentage = (currTime / duration) * 100;
 
-    progressLine.style.width = `${percentage}%`;
+	progressLine.style.width = `${percentage}%`;
 
-    const audioDuration = myAudio.duration;
-    const totalMin = Math.floor(audioDuration / 60);
-    const totalSec = Math.floor(audioDuration % 60);
-    totalTime.innerText = `${totalMin}:${totalSec}`;
+	const audioDuration = myAudio.duration;
+	const totalMin = Math.floor(audioDuration / 60);
+	const totalSec = Math.floor(audioDuration % 60);
+	totalTime.innerText = `${totalMin}:${totalSec}`;
 
-    const currentMin = Math.floor(currTime / 60);
-    let currentSec = Math.floor(currTime % 60);
-    if (currentSec < 10) {
-        currentSec = `0${currentSec}`;
-    }
-    startTime.innerText = `${currentMin}:${currentSec}`;
+	const currentMin = Math.floor(currTime / 60);
+	let currentSec = Math.floor(currTime % 60);
+	if (currentSec < 10) {
+		currentSec = `0${currentSec}`;
+	}
+	startTime.innerText = `${currentMin}:${currentSec}`;
 });
 
 myAudio.addEventListener('canplaythrough', () => {
-    const audioDuration = myAudio.duration;
-    const totalMin = Math.floor(audioDuration / 60);
-    const totalSec = Math.floor(audioDuration % 60);
-    totalTime.innerText = `${totalMin}:${totalSec}`;
+	const audioDuration = myAudio.duration;
+	const totalMin = Math.floor(audioDuration / 60);
+	const totalSec = Math.floor(audioDuration % 60);
+	totalTime.innerText = `${totalMin}:${totalSec}`;
 });
 
-// myAudio.addEventListener('timeupdate', (even) => {
-// 	const currTime = even.target.currentTime;
-// 	const duration = even.target.duration;
-// 	const percentage = (currTime / duration) * 100;
-
-// 	progressLine.style.width = `${percentage}%`;
-
-// 	myAudio.addEventListener('loadeddata', () => {
-// 		let audioDuration = myAudio.duration;
-// 		let totalMin = Math.floor(audioDuration / 60);
-// 		let totalSec = Math.floor(audioDuration % 60);
-// 		totalTime.innerText = `${totalMin}:${totalSec}`;
-// 	});
-
-// 	let currentMin = Math.floor(currTime / 60);
-// 	let currentSec = Math.floor(currTime % 60);
-// 	if (currentSec < 10) {
-// 		currentSec = `0${currentSec}`;
-// 	}
-// 	startTime.innerText = `${currentMin}:${currentSec}`;
-// });
-
 progressArea.addEventListener('click', (e) => {
-    const progressWidthVal = progressArea.clientWidth;
-    const clickedOffSetX = e.offsetX;
-    const songDuration = myAudio.duration;
-    myAudio.currentTime = (clickedOffSetX / progressWidthVal) * songDuration;
+	const progressWidthVal = progressArea.clientWidth;
+	const clickedOffSetX = e.offsetX;
+	const songDuration = myAudio.duration;
+	myAudio.currentTime = (clickedOffSetX / progressWidthVal) * songDuration;
 });
 
 musicDirectionBtn.addEventListener('click', () => {
-    const getText = musicDirectionBtn.innerText;
+	const getText = musicDirectionBtn.innerText;
 
-    switch (getText) {
-        case 'repeat':
-            musicDirectionBtn.innerText = 'repeat_one';
-            musicDirectionBtn.setAttribute('title', 'song looped');
-            break;
-        case 'repeat_one':
-            musicDirectionBtn.innerText = 'shuffle';
-            musicDirectionBtn.setAttribute('title', 'playback shuffle');
-            break;
-        case 'shuffle':
-            musicDirectionBtn.innerText = 'repeat';
-            musicDirectionBtn.setAttribute('title', 'playlist looped');
-            break;
-    }
+	switch (getText) {
+		case 'repeat':
+			musicDirectionBtn.innerText = 'repeat_one';
+			musicDirectionBtn.setAttribute('title', 'song looped');
+			break;
+		case 'repeat_one':
+			musicDirectionBtn.innerText = 'shuffle';
+			musicDirectionBtn.setAttribute('title', 'playback shuffle');
+			break;
+		case 'shuffle':
+			musicDirectionBtn.innerText = 'repeat';
+			musicDirectionBtn.setAttribute('title', 'playlist looped');
+			break;
+	}
 });
 
 myAudio.addEventListener('ended', () => {
-    const getText = musicDirectionBtn.innerText;
+	const getText = musicDirectionBtn.innerText;
 
-    switch (getText) {
-        case 'repeat':
-            nextAndPrevSong('next');
-            break;
-        case 'repeat_one':
-            myAudio.currentTime = 0;
-            loadMusic(musicIndex);
-            playMusic();
-            break;
-        case 'shuffle':
-            let randomIndex = Math.floor(Math.random() * musicData.length);
-            do {
-                randomIndex = Math.floor(Math.random() * musicData.length);
-            } while (musicIndex === randomIndex);
-            musicIndex = randomIndex;
-            console.log(musicIndex);
-            loadMusic(musicIndex);
-            playMusic();
-            break;
-    }
+	switch (getText) {
+		case 'repeat':
+			nextAndPrevSong('next');
+			break;
+		case 'repeat_one':
+			myAudio.currentTime = 0;
+			loadMusic(musicIndex);
+			playMusic();
+			playingNow();
+			break;
+		case 'shuffle':
+			let randomIndex = Math.floor(Math.random() * musicData.length);
+			do {
+				randomIndex = Math.floor(Math.random() * musicData.length);
+			} while (musicIndex === randomIndex);
+			musicIndex = randomIndex;
+			console.log(musicIndex);
+			loadMusic(musicIndex);
+			playMusic();
+			playingNow();
+			break;
+	}
 });
 
 const ulTag = wrapper.querySelector('ul');
 
 for (let index = 0; index < musicData.length; index++) {
-    const element = `<li li-index="${index}">
+	const element = `<li li-index="${index}">
 							<div class="row">
 								<span>${musicData[index].name}</span>
 								<p>${musicData[index].artist}</p>
@@ -189,48 +172,48 @@ for (let index = 0; index < musicData.length; index++) {
 							<audio class="${musicData[index].id}" src="${musicData[index].src}"></audio>
 							<span id="${musicData[index].id}" class="audio-duration">3:40</span>
 						</li>`;
-    ulTag.insertAdjacentHTML('beforeend', element);
-    const liAudioDuration = ulTag.querySelector(`#${musicData[index].id}`);
-    const liAudioTag = ulTag.querySelector(`.${musicData[index].id}`);
+	ulTag.insertAdjacentHTML('beforeend', element);
+	const liAudioDuration = ulTag.querySelector(`#${musicData[index].id}`);
+	const liAudioTag = ulTag.querySelector(`.${musicData[index].id}`);
 
-    liAudioTag.addEventListener('loadeddata', () => {
-        const audioDuration = liAudioTag.duration;
-        const totalMin = Math.floor(audioDuration / 60);
-        const totalSec = Math.floor(audioDuration % 60);
-        liAudioDuration.innerText = `${totalMin}:${totalSec}`;
-    });
+	liAudioTag.addEventListener('loadeddata', () => {
+		const audioDuration = liAudioTag.duration;
+		const totalMin = Math.floor(audioDuration / 60);
+		const totalSec = Math.floor(audioDuration % 60);
+		liAudioDuration.innerText = `${totalMin}:${totalSec}`;
+	});
 }
 
 const allLiTags = ulTag.querySelectorAll('li');
 
-for (let index = 0; index < allLiTags.length; index += 1) {
-    if (allLiTags[index].getAttribute('li-index') == musicIndex) {
-        allLiTags[index].classList.add('playing');
-    }
-    allLiTags[index].setAttribute('onclick', 'test(this)');
+function playingNow() {
+	allLiTags.forEach((li) => {
+		const audioDue = li.querySelector('.audio-duration');
+
+		if (li.classList.contains('playing')) {
+			const audioTag = li.querySelector('audio');
+			li.classList.remove('playing');
+
+			const audioDuration = audioTag.duration;
+			const totalMin = Math.floor(audioDuration / 60);
+			const totalSec = Math.floor(audioDuration % 60);
+			audioDue.innerText = `${totalMin}:${totalSec}`;
+		}
+
+		if (li.getAttribute('li-index') == musicIndex) {
+			li.classList.add('playing');
+			audioDue.innerText = 'playing';
+		}
+
+		li.onclick = () => test(li);
+	});
 }
+playingNow();
 
 function test(element) {
-    const getLiIndex = element.getAttribute('li-index');
-    musicIndex = getLiIndex;
+	const getLiIndex = element.getAttribute('li-index');
+	musicIndex = getLiIndex;
 
-    for (let index = 0; index < allLiTags.length; index += 1) {
-        const audioDue = allLiTags[index].querySelector('.audio-duration');
-        if (allLiTags[index].classList.contains('playing')) {
-            const audioTag = allLiTags[index].querySelector('audio');
-            allLiTags[index].classList.remove('playing');
-            //
-            const audioDuration = audioTag.duration;
-            const totalMin = Math.floor(audioDuration / 60);
-            const totalSec = Math.floor(audioDuration % 60);
-            audioDue.innerText = `${totalMin}:${totalSec}`;
-        }
-        if (allLiTags[index].getAttribute('li-index') == musicIndex) {
-            allLiTags[index].classList.add('playing');
-            audioDue.innerText = 'playing';
-        }
-    }
-
-    loadMusic(musicIndex);
-    playMusic();
+	loadMusic(musicIndex);
+	playMusic();
 }
